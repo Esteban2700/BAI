@@ -3,131 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MenteSana Pro | Tu Psicólogo de Bolsillo</title>
-    <!-- Iconos -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <!-- Fuente Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <title>MenteSana - Tu Espacio Seguro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #000000;
-            --card-bg: rgba(20, 20, 20, 0.8);
-            --primary: #00f2ff; /* Cian Neón */
-            --secondary: #bd00ff; /* Violeta Neón */
-            --success: #00ff9d;
-            --danger: #ff0055;
+            --bg-color: #050505;
+            --card-bg: rgba(20, 20, 20, 0.7);
+            --primary: #00f2ea;
+            --secondary: #ff0050;
             --text-main: #ffffff;
-            --text-sec: #a0a0a0;
-            --glass: blur(15px);
-            --nav-height: 70px;
+            --text-muted: #a0a0a0;
+            --success: #00ff9d;
+            --warning: #ffcc00;
+            --danger: #ff4444;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            overflow-x: hidden;
             min-height: 100vh;
-            padding-bottom: calc(var(--nav-height) + 20px);
+            overflow-x: hidden;
+            padding-bottom: 80px; /* Space for nav */
         }
 
-        /* Fondo Animado */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.15) 0%, transparent 40%);
-            animation: pulseBg 10s infinite alternate;
-        }
-
-        @keyframes pulseBg {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        /* Header & Perfil */
+        /* --- Header & Profile --- */
         header {
             padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: var(--glass);
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
         }
 
-        .user-info h2 { font-size: 1.2rem; font-weight: 700; }
-        .user-info p { font-size: 0.8rem; color: var(--primary); }
+        .user-info h1 { font-size: 1.2rem; font-weight: 700; background: linear-gradient(45deg, var(--primary), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .user-info p { font-size: 0.8rem; color: var(--text-muted); }
         
         .level-badge {
-            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            background: var(--glass);
+            border: 1px solid var(--border);
             padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.8rem;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(189, 0, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* Contenedores de Secciones */
-        .section {
-            display: none;
+        .xp-bar-container {
+            width: 100%;
+            height: 4px;
+            background: #222;
+            margin-top: 10px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .xp-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* --- Main Container --- */
+        .container {
             padding: 20px;
-            animation: fadeIn 0.4s ease;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        .section.active { display: block; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section-title {
+            font-size: 1.1rem;
+            margin: 25px 0 15px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
 
-        /* Tarjetas Glassmorphism */
+        /* --- Cards --- */
         .card {
             background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 20px;
-            margin-bottom: 20px;
-            backdrop-filter: var(--glass);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .card h3 { margin-bottom: 10px; color: var(--primary); font-size: 1.1rem; }
+        .card:active { transform: scale(0.98); }
 
-        /* Botones */
+        .card-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 242, 234, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* --- Buttons --- */
         .btn {
             width: 100%;
             padding: 15px;
             border: none;
-            border-radius: 15px;
-            background: linear-gradient(90deg, var(--secondary), var(--primary));
-            color: white;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            transition: transform 0.2s;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(0, 242, 255, 0.3);
-        }
-        .btn:active { transform: scale(0.98); }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            box-shadow: none;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Navegación Inferior */
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), #00c2bb);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(0, 242, 234, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, var(--secondary), #cc0040);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 0, 80, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 80, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 0, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 80, 0); }
+        }
+
+        /* --- Navigation --- */
         .bottom-nav {
             position: fixed;
             bottom: 20px;
@@ -137,571 +171,590 @@
             max-width: 400px;
             background: rgba(20, 20, 20, 0.9);
             backdrop-filter: blur(20px);
-            border-radius: 30px;
+            border: 1px solid var(--border);
+            border-radius: 25px;
             display: flex;
             justify-content: space-around;
-            padding: 15px 10px;
-            border: 1px solid rgba(255,255,255,0.1);
+            padding: 15px;
             z-index: 1000;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .nav-item {
-            color: var(--text-sec);
-            text-align: center;
-            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-size: 1.2rem;
             cursor: pointer;
             transition: 0.3s;
+            position: relative;
         }
-        .nav-item i { font-size: 1.4rem; display: block; margin-bottom: 4px; }
-        .nav-item.active { color: var(--primary); text-shadow: 0 0 10px var(--primary); transform: translateY(-5px); }
 
-        /* Test BAI Estilos */
-        .bai-option {
-            background: rgba(255,255,255,0.05);
-            padding: 15px;
-            margin: 8px 0;
-            border-radius: 12px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-        .bai-option.selected {
-            border-color: var(--primary);
-            background: rgba(0, 242, 255, 0.1);
+        .nav-item.active {
             color: var(--primary);
+            transform: translateY(-5px);
         }
 
-        /* Retos */
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        /* --- Views Logic --- */
+        .view { display: none; animation: fadeIn 0.4s ease; }
+        .view.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- Test Styles --- */
+        .question-card { text-align: center; }
+        .question-text { font-size: 1.2rem; margin-bottom: 25px; line-height: 1.5; }
+        .options-grid { display: grid; gap: 10px; }
+        .option-btn {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .option-btn:hover, .option-btn.selected {
+            background: rgba(0, 242, 234, 0.1);
+            border-color: var(--primary);
+        }
+
+        /* --- Results Styles --- */
+        .result-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--border);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            position: relative;
+            background: conic-gradient(var(--primary) 0%, var(--border) 0%);
+        }
+        .result-circle::before {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: var(--bg-color);
+            border-radius: 50%;
+        }
+        .result-value { position: relative; z-index: 2; }
+
+        .alert-box {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* --- Challenges --- */
         .challenge-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            background: rgba(255,255,255,0.03);
+            justify-content: space-between;
             padding: 15px;
-            border-radius: 15px;
+            background: var(--glass);
+            border-radius: 12px;
             margin-bottom: 10px;
-            border-left: 4px solid var(--secondary);
+            border: 1px solid var(--border);
         }
-        .challenge-check {
-            width: 25px;
-            height: 25px;
-            border: 2px solid var(--text-sec);
-            border-radius: 50%;
+        .checkbox-custom {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--text-muted);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
         }
-        .challenge-check.done {
+        .checkbox-custom.checked {
             background: var(--success);
             border-color: var(--success);
-            color: black;
+            color: #000;
         }
 
-        /* Ejercicios Grid */
+        /* --- Exercises --- */
         .exercise-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
-        .ex-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            padding: 20px 10px;
+        .exercise-card {
+            background: var(--card-bg);
             border-radius: 15px;
+            padding: 20px;
             text-align: center;
+            border: 1px solid var(--border);
             cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.05);
         }
-        .ex-card i { font-size: 2rem; color: var(--primary); margin-bottom: 10px; }
-        .ex-card:hover { background: rgba(255,255,255,0.1); }
-
-        /* Animación Respiración */
-        .breath-circle {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--primary), transparent);
-            margin: 40px auto;
-            opacity: 0.5;
-            transform: scale(1);
-        }
-        .breathing .breath-circle {
-            animation: breatheAnim 8s infinite ease-in-out;
-        }
-        @keyframes breatheAnim {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.5); opacity: 0.8; }
-        }
-
-        /* Modal Resultados */
+        .exercise-icon { font-size: 2rem; margin-bottom: 10px; color: var(--primary); }
+        
+        /* Modal for Exercise */
         .modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.9);
             z-index: 2000;
             display: none;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 20px;
-        }
-        .modal-content {
-            background: #111;
-            padding: 30px;
-            border-radius: 20px;
             text-align: center;
-            border: 1px solid var(--danger);
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 0 50px rgba(255, 0, 85, 0.3);
         }
-        .urgent-btn {
-            background: var(--danger);
-            animation: pulseRed 2s infinite;
+        .breathing-circle {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--primary), transparent);
+            border-radius: 50%;
+            margin: 30px auto;
+            opacity: 0.5;
+            transform: scale(0.5);
         }
-        @keyframes pulseRed {
-            0% { box-shadow: 0 0 0 0 rgba(255, 0, 85, 0.7); }
-            70% { box-shadow: 0 0 0 20px rgba(255, 0, 85, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 0, 85, 0); }
+        .animate-breathe {
+            animation: breathe 8s infinite ease-in-out;
         }
-
-        /* Frase del día */
-        .quote-box {
-            font-style: italic;
-            text-align: center;
-            color: var(--text-sec);
-            border-left: 3px solid var(--primary);
-            padding-left: 15px;
-            margin: 20px 0;
+        @keyframes breathe {
+            0%, 100% { transform: scale(0.5); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
-
     <!-- Header -->
     <header>
         <div class="user-info">
-            <h2>Hola, Esteban</h2>
-            <p id="level-display">Nivel 1 • Novato</p>
+            <h1>MenteSana</h1>
+            <p id="greeting">Hola, Esteban</p>
+            <div class="xp-bar-container">
+                <div class="xp-bar-fill" id="xpBar"></div>
+            </div>
         </div>
         <div class="level-badge">
-            <i class="fas fa-star"></i> <span id="xp-points">0</span> XP
+            <i class="fas fa-crown" style="color: gold;"></i>
+            <span id="levelDisplay">Nivel 1</span>
         </div>
     </header>
 
-    <!-- SECCIÓN 1: INICIO -->
-    <div id="home" class="section active">
-        <div class="card">
-            <h3><i class="fas fa-quote-left"></i> Frase del Día</h3>
-            <div class="quote-box" id="daily-quote">
-                "La calma no es la ausencia de caos, es la paz en medio de él."
-            </div>
-        </div>
+    <div class="container">
 
-        <div class="card">
-            <h3><i class="fas fa-fire"></i> Tus Retos de Hoy</h3>
-            <p style="font-size: 0.8rem; color: #888; margin-bottom: 15px;">Completa los retos para ganar XP</p>
-            <div id="challenges-list">
-                <!-- Se llenan con JS -->
-            </div>
-        </div>
-
-        <div class="card" style="border-color: var(--primary);">
-            <h3><i class="fas fa-chart-line"></i> Progreso Semanal</h3>
-            <div style="height: 100px; display: flex; align-items: flex-end; justify-content: space-between; gap: 5px;">
-                <!-- Barras simuladas -->
-                <div style="width: 12%; height: 40%; background: #333; border-radius: 4px;"></div>
-                <div style="width: 12%; height: 60%; background: #333; border-radius: 4px;"></div>
-                <div style="width: 12%; height: 30%; background: #333; border-radius: 4px;"></div>
-                <div style="width: 12%; height: 80%; background: var(--primary); border-radius: 4px; box-shadow: 0 0 10px var(--primary);"></div>
-                <div style="width: 12%; height: 50%; background: #333; border-radius: 4px;"></div>
-                <div style="width: 12%; height: 70%; background: #333; border-radius: 4px;"></div>
-                <div style="width: 12%; height: 40%; background: #333; border-radius: 4px;"></div>
-            </div>
-            <p style="text-align: center; margin-top: 10px; font-size: 0.8rem;">Tu ansiedad ha bajado un 15% esta semana</p>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 2: TEST BAI -->
-    <div id="test" class="section">
-        <div class="card">
-            <h3>Inventario de Ansiedad de Beck (BAI)</h3>
-            <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;">
-                Responde honestamente cómo te has sentido en la <strong>última semana</strong>, incluyendo hoy.
-            </p>
-            <div id="bai-container">
-                <!-- Preguntas generadas por JS -->
-            </div>
-            <button class="btn" onclick="calculateBAI()">Ver Resultados</button>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 3: EJERCICIOS -->
-    <div id="exercises" class="section">
-        <h3 style="margin-bottom: 15px;">Elige tu herramienta</h3>
-        <div class="exercise-grid">
-            <div class="ex-card" onclick="startExercise('breath')">
-                <i class="fas fa-wind"></i>
-                <h4>Respiración 4-7-8</h4>
-            </div>
-            <div class="ex-card" onclick="startExercise('grounding')">
-                <i class="fas fa-tree"></i>
-                <h4>Técnica 5-4-3-2-1</h4>
-            </div>
-            <div class="ex-card" onclick="startExercise('body')">
-                <i class="fas fa-spa"></i>
-                <h4>Escaneo Corporal</h4>
-            </div>
-            <div class="ex-card" onclick="startExercise('visual')">
-                <i class="fas fa-eye"></i>
-                <h4>Visualización</h4>
-            </div>
-            <div class="ex-card" onclick="startExercise('music')">
-                <i class="fas fa-music"></i>
-                <h4>Frecuencias Calma</h4>
-            </div>
-            <div class="ex-card" onclick="startExercise('journal')">
-                <i class="fas fa-pen-fancy"></i>
-                <h4>Diario Emocional</h4>
-            </div>
-        </div>
-
-        <!-- Área dinámica de ejercicio -->
-        <div id="active-exercise-area" class="card" style="margin-top: 20px; display: none; text-align: center;">
-            <h3 id="ex-title">Título</h3>
-            <div id="ex-content" style="min-height: 150px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                <!-- Contenido dinámico -->
-            </div>
-            <button class="btn btn-outline" onclick="closeExercise()" style="margin-top: 20px;">Finalizar</button>
-        </div>
-    </div>
-
-    <!-- SECCIÓN 4: PERFIL -->
-    <div id="profile" class="section">
-        <div class="card" style="text-align: center;">
-            <div style="width: 80px; height: 80px; background: #333; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">👤</div>
-            <h3>Esteban</h3>
-            <p style="color: var(--primary);">Miembro Premium</p>
+        <!-- VIEW: HOME -->
+        <div id="home-view" class="view active">
+            <div class="section-title">Tu Estado Hoy</div>
             
-            <div style="margin-top: 20px; display: flex; justify-content: space-around;">
-                <div>
-                    <h4 style="color: var(--success);">12</h4>
-                    <span style="font-size: 0.7rem;">Rachas</span>
+            <div class="card" style="border-left: 4px solid var(--primary);">
+                <div class="card-glow"></div>
+                <h3><i class="fas fa-quote-left"></i> Frase del Día</h3>
+                <p id="dailyQuote" style="margin-top: 10px; font-style: italic; color: var(--text-muted);">"La calma es el superpoder del siglo XXI."</p>
+            </div>
+
+            <div class="section-title">Retos Diarios</div>
+            <div id="challengesList">
+                <!-- Challenges injected by JS -->
+            </div>
+
+            <div class="section-title">Acción Rápida</div>
+            <button class="btn btn-primary" onclick="startTest()">
+                <i class="fas fa-clipboard-list"></i> Realizar Test BAI
+            </button>
+        </div>
+
+        <!-- VIEW: TEST -->
+        <div id="test-view" class="view">
+            <div class="card question-card">
+                <div style="display:flex; justify-content:space-between; margin-bottom:15px; color:var(--text-muted); font-size:0.8rem;">
+                    <span>Pregunta <span id="qCurrent">1</span> de 21</span>
+                    <span id="qProgress">0%</span>
                 </div>
-                <div>
-                    <h4 style="color: var(--secondary);">450</h4>
-                    <span style="font-size: 0.7rem;">XP Total</span>
+                <h2 class="question-text" id="questionText">Cargando...</h2>
+                <div class="options-grid" id="optionsContainer">
+                    <!-- Options injected by JS -->
                 </div>
-                <div>
-                    <h4 style="color: var(--primary);">8</h4>
-                    <span style="font-size: 0.7rem;">Medallas</span>
+            </div>
+            <button class="btn btn-outline" onclick="showView('home-view')" style="margin-top:20px;">Cancelar</button>
+        </div>
+
+        <!-- VIEW: RESULTS -->
+        <div id="results-view" class="view">
+            <div class="card" style="text-align: center;">
+                <h2>Resultados del BAI</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Inventario de Ansiedad de Beck</p>
+                
+                <div class="result-circle" id="scoreCircle">
+                    <span class="result-value" id="scoreValue">0</span>
+                </div>
+                
+                <h3 id="diagnosisTitle" style="margin-bottom: 10px;">Calculando...</h3>
+                <p id="diagnosisDesc" style="color: var(--text-muted); font-size: 0.9rem;"></p>
+
+                <div id="specialistAlert" class="alert-box" style="display: none;">
+                    <i class="fas fa-exclamation-triangle" style="color: var(--danger); font-size: 1.5rem; margin-bottom: 10px;"></i>
+                    <p style="font-weight: bold; margin-bottom: 5px;">Se recomienda ayuda profesional</p>
+                    <p style="font-size: 0.8rem; margin-bottom: 15px;">Tu nivel de ansiedad sugiere que hablar con un especialista podría ayudarte mucho.</p>
+                    <button class="btn btn-danger" onclick="findSpecialist()">
+                        <i class="fas fa-map-marker-alt"></i> Buscar Psicólogos Cerca
+                    </button>
+                </div>
+
+                <button class="btn btn-primary" onclick="showView('home-view')" style="margin-top: 20px;">
+                    Volver al Inicio
+                </button>
+            </div>
+        </div>
+
+        <!-- VIEW: EXERCISES -->
+        <div id="exercises-view" class="view">
+            <div class="section-title">Herramientas de Calma</div>
+            <div class="exercise-grid">
+                <div class="exercise-card" onclick="openExercise('breathing')">
+                    <div class="exercise-icon"><i class="fas fa-wind"></i></div>
+                    <h4>Respiración 4-7-8</h4>
+                </div>
+                <div class="exercise-card" onclick="openExercise('grounding')">
+                    <div class="exercise-icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h4>Técnica 5-4-3-2-1</h4>
+                </div>
+                <div class="exercise-card" onclick="openExercise('muscle')">
+                    <div class="exercise-icon"><i class="fas fa-spa"></i></div>
+                    <h4>Relajación Muscular</h4>
+                </div>
+                <div class="exercise-card" onclick="openExercise('visualization')">
+                    <div class="exercise-icon"><i class="fas fa-cloud-sun"></i></div>
+                    <h4>Visualización</h4>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <h3>Historial de Tests</h3>
-            <ul style="list-style: none; font-size: 0.9rem; color: #aaa;">
-                <li style="padding: 10px 0; border-bottom: 1px solid #333;">Hoy: <span style="color: var(--success); float: right;">Bajo</span></li>
-                <li style="padding: 10px 0; border-bottom: 1px solid #333;">Ayer: <span style="color: orange; float: right;">Moderado</span></li>
-                <li style="padding: 10px 0;">12 Oct: <span style="color: var(--danger); float: right;">Alto</span></li>
-            </ul>
-        </div>
-        
-        <button class="btn btn-outline" onclick="alert('Configuración próximamente')">Configuración</button>
-        <button class="btn btn-outline" style="border-color: var(--danger); color: var(--danger);" onclick="localStorage.clear(); location.reload();">Borrar Datos</button>
     </div>
 
-    <!-- Navegación Inferior -->
+    <!-- Navigation -->
     <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('home', this)">
-            <i class="fas fa-home"></i> Inicio
+        <div class="nav-item active" onclick="showView('home-view'); updateNav(this)">
+            <i class="fas fa-home"></i>
         </div>
-        <div class="nav-item" onclick="switchTab('test', this)">
-            <i class="fas fa-clipboard-list"></i> Test BAI
+        <div class="nav-item" onclick="showView('exercises-view'); updateNav(this)">
+            <i class="fas fa-brain"></i>
         </div>
-        <div class="nav-item" onclick="switchTab('exercises', this)">
-            <i class="fas fa-heartbeat"></i> Ejercicios
+        <div class="nav-item" onclick="startTest(); updateNav(this)">
+            <i class="fas fa-notes-medical"></i>
         </div>
-        <div class="nav-item" onclick="switchTab('profile', this)">
-            <i class="fas fa-user"></i> Perfil
+        <div class="nav-item" onclick="alert('Perfil en construcción'); updateNav(this)">
+            <i class="fas fa-user"></i>
         </div>
     </nav>
 
-    <!-- Modal de Resultados -->
-    <div id="result-modal" class="modal">
-        <div class="modal-content">
-            <i class="fas fa-heartbeat" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
-            <h2 id="res-title">Resultado</h2>
-            <p id="res-score" style="font-size: 2rem; font-weight: bold; margin: 10px 0;">0</p>
-            <p id="res-desc" style="margin-bottom: 20px; color: #ccc;">Descripción...</p>
-            
-            <div id="specialist-section" style="display: none;">
-                <p style="color: var(--danger); font-weight: bold; margin-bottom: 10px;">⚠️ Nivel Alto Detectado</p>
-                <p style="font-size: 0.9rem; margin-bottom: 15px;">Es muy recomendable hablar con un profesional. ¿Quieres encontrar uno cerca de ti?</p>
-                <button class="btn urgent-btn" onclick="findSpecialist()">
-                    <i class="fas fa-map-marker-alt"></i> Buscar Especialistas Cerca
-                </button>
-            </div>
-            
-            <button class="btn btn-outline" onclick="document.getElementById('result-modal').style.display='none'">Cerrar</button>
+    <!-- Exercise Modal -->
+    <div id="exerciseModal" class="modal">
+        <h2 id="modalTitle" style="margin-bottom: 10px;">Ejercicio</h2>
+        <p id="modalInstruction" style="color: var(--text-muted); margin-bottom: 20px;">Sigue el ritmo...</p>
+        
+        <div id="breathingVisual" class="breathing-circle" style="display:none;"></div>
+        <div id="groundingContent" style="display:none; max-width: 300px;">
+            <ul style="text-align: left; list-style: none; line-height: 2;">
+                <li>👀 5 cosas que ves</li>
+                <li>✋ 4 cosas que tocas</li>
+                <li>👂 3 cosas que oyes</li>
+                <li>👃 2 cosas que hueles</li>
+                <li>👅 1 cosa que saboreas</li>
+            </ul>
         </div>
+
+        <button class="btn btn-outline" onclick="closeExercise()" style="margin-top: 30px; width: auto; padding: 10px 30px;">Cerrar</button>
     </div>
 
     <script>
-        // --- DATOS Y ESTADO ---
-        let xp = parseInt(localStorage.getItem('xp')) || 0;
-        let completedChallenges = JSON.parse(localStorage.getItem('challenges')) || [];
-        
-        // Actualizar UI inicial
-        document.getElementById('xp-points').innerText = xp;
-        updateLevel();
-        loadChallenges();
-        loadQuote();
-
-        // --- NAVEGACIÓN ---
-        function switchTab(tabId, element) {
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            
-            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        // --- SISTEMA DE RETOS ---
-        const allChallenges = [
-            { id: 1, text: "Bebe 2 litros de agua hoy 💧", xp: 20 },
-            { id: 2, text: "Escribe 3 cosas por las que estás agradecido 📝", xp: 30 },
-            { id: 3, text: "Camina 15 minutos sin celular 🚶", xp: 25 },
-            { id: 4, text: "Llama o escribe a un amigo/familiar 📞", xp: 30 },
-            { id: 5, text: "Ducha de contraste (caliente/fría) 🚿", xp: 40 },
-            { id: 6, text: "Lee 10 páginas de un libro 📖", xp: 20 },
-            { id: 7, text: "Medita 5 minutos 🧘", xp: 35 }
+        // --- DATA ---
+        const baiQuestions = [
+            "Entumecimiento u hormigueo", "Sensación de calor", "Temblor en las piernas", 
+            "Incapaz de relajarse", "Miedo a que ocurra lo peor", "Mareo o aturdimiento", 
+            "Latidos cardíacos acelerados", "Inestabilidad", "Sensación de asfixia", 
+            "Dificultad para respirar", "Manos sudorosas", "Temblor en las manos", 
+            "Temblor general", "Miedo a perder el control", "Dificultad para concentrarse", 
+            "Presión en la cabeza", "Desmayos", "Rubor facial", "Sudoración", 
+            "Nerviosismo", "Sensación de muerte inminente"
         ];
 
-        function loadChallenges() {
-            const list = document.getElementById('challenges-list');
-            list.innerHTML = '';
-            
-            // Seleccionar 3 retos aleatorios si no hay hoy
-            let todayChallenges = JSON.parse(localStorage.getItem('todayChallenges'));
-            const todayStr = new Date().toDateString();
-            const lastDate = localStorage.getItem('lastChallengeDate');
+        const challengesDB = [
+            { text: "Escribe 3 cosas por las que estás agradecido hoy", xp: 50 },
+            { text: "Bebe un vaso grande de agua ahora mismo", xp: 20 },
+            { text: "Llama o escribe a un amigo/familiar", xp: 60 },
+            { text: "Camina 10 minutos sin celular", xp: 80 },
+            { text: "Ordena tu cama o tu escritorio", xp: 40 },
+            { text: "Escucha una canción que te haga feliz", xp: 30 },
+            { text: "Haz 5 minutos de estiramientos", xp: 50 },
+            { text: "No uses redes sociales por 1 hora", xp: 100 }
+        ];
 
-            if (!todayChallenges || lastDate !== todayStr) {
-                todayChallenges = allChallenges.sort(() => 0.5 - Math.random()).slice(0, 3);
-                localStorage.setItem('todayChallenges', JSON.stringify(todayChallenges));
-                localStorage.setItem('lastChallengeDate', todayStr);
-                // Resetear completados del día anterior si se desea lógica estricta
+        const quotes = [
+            "No tienes que controlar tus pensamientos. Solo tienes que dejar de dejar que ellos te controlen a ti.",
+            "La ansiedad no define quién eres. Es solo una visitante temporal.",
+            "Respira. Esto también pasará.",
+            "Pequeños pasos todos los días suman grandes resultados.",
+            "Tu salud mental es una prioridad, no una opción."
+        ];
+
+        // --- STATE ---
+        let currentQuestion = 0;
+        let score = 0;
+        let userXP = parseInt(localStorage.getItem('menteSanaXP')) || 0;
+        let userLevel = Math.floor(userXP / 500) + 1;
+        let completedChallenges = JSON.parse(localStorage.getItem('menteSanaChallenges')) || [];
+
+        // --- INIT ---
+        window.onload = function() {
+            updateProfile();
+            loadDailyChallenges();
+            setDailyQuote();
+            
+            // Check if last test was severe
+            const lastResult = localStorage.getItem('lastBAIScore');
+            if(lastResult && parseInt(lastResult) > 15) {
+                // Optional: Show alert on home if recent high score
             }
+        };
 
-            todayChallenges.forEach(ch => {
-                const isDone = completedChallenges.includes(ch.id);
-                const div = document.createElement('div');
-                div.className = 'challenge-item';
-                div.innerHTML = `
-                    <span style="${isDone ? 'text-decoration: line-through; color: #555;' : ''}">${ch.text}</span>
-                    <div class="challenge-check ${isDone ? 'done' : ''}" onclick="toggleChallenge(${ch.id}, ${ch.xp}, this)">
-                        ${isDone ? '<i class="fas fa-check"></i>' : ''}
-                    </div>
-                `;
-                list.appendChild(div);
-            });
-        }
-
-        function toggleChallenge(id, points, element) {
-            if (completedChallenges.includes(id)) return; // Ya hecho
-            
-            completedChallenges.push(id);
-            localStorage.setItem('challenges', JSON.stringify(completedChallenges));
-            
-            // Animación y suma de XP
-            element.classList.add('done');
-            element.innerHTML = '<i class="fas fa-check"></i>';
-            addXP(points);
-            
-            // Tachar texto
-            element.previousElementSibling.style.textDecoration = 'line-through';
-            element.previousElementSibling.style.color = '#555';
+        function updateProfile() {
+            document.getElementById('xpBar').style.width = (userXP % 500) / 5 + '%';
+            document.getElementById('levelDisplay').innerText = 'Nivel ' + userLevel;
         }
 
         function addXP(amount) {
-            xp += amount;
-            localStorage.setItem('xp', xp);
-            document.getElementById('xp-points').innerText = xp;
-            updateLevel();
-            
-            // Efecto visual simple
-            const badge = document.querySelector('.level-badge');
-            badge.style.transform = "scale(1.2)";
-            setTimeout(() => badge.style.transform = "scale(1)", 200);
+            userXP += amount;
+            localStorage.setItem('menteSanaXP', userXP);
+            const newLevel = Math.floor(userXP / 500) + 1;
+            if(newLevel > userLevel) {
+                alert("¡Felicidades! Has subido al Nivel " + newLevel);
+            }
+            userLevel = newLevel;
+            updateProfile();
         }
 
-        function updateLevel() {
-            let level = 1;
-            let title = "Novato";
-            if (xp > 100) { level = 2; title = "Explorador"; }
-            if (xp > 300) { level = 3; title = "Guardián"; }
-            if (xp > 600) { level = 4; title = "Maestro Zen"; }
-            
-            document.getElementById('level-display').innerText = `Nivel ${level} • ${title}`;
+        function setDailyQuote() {
+            const today = new Date().getDay();
+            document.getElementById('dailyQuote').innerText = quotes[today % quotes.length];
         }
 
-        function loadQuote() {
-            const quotes = [
-                "No tienes que controlar tus pensamientos. Solo tienes que dejar de dejar que ellos te controlen a ti.",
-                "La ansiedad no te define. Es solo una visitante temporal.",
-                "Respira. Esto también pasará.",
-                "Eres más fuerte de lo que crees y más capaz de lo que imaginas."
-            ];
-            document.getElementById('daily-quote').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
+        // --- NAVIGATION ---
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(el => el.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo(0,0);
         }
 
-        // --- TEST BAI ---
-        const baiQuestions = [
-            "Entumecimiento u hormigueo", "Sensación de calor", "Temblor en las piernas", 
-            "Incapacidad para relajarse", "Miedo a que ocurra lo peor", "Mareo o aturdimiento",
-            "Palpitaciones del corazón", "Inestabilidad", "Sensación de asfixia",
-            "Manos sudorosas", "Indigestión o malestar abdominal", "Sensación de atragantamiento",
-            "Opresión en el pecho", "Rubor facial", "Sudoración (no por calor)",
-            "Nerviosismo", "Sensación de muerte inminente", "Miedo a perder el control",
-            "Dificultad para concentrarse", "Sensación de vacío en la cabeza", "Desmayo"
-        ];
+        function updateNav(element) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
 
-        function renderBAI() {
-            const container = document.getElementById('bai-container');
-            container.innerHTML = '';
-            
-            baiQuestions.forEach((q, index) => {
-                const qDiv = document.createElement('div');
-                qDiv.style.marginBottom = "25px";
-                qDiv.innerHTML = `
-                    <p style="margin-bottom: 10px; font-weight: 600;">${index + 1}. ${q}</p>
-                    <div class="bai-option" onclick="selectOption(this, ${index}, 0)">Nada en absoluto (0)</div>
-                    <div class="bai-option" onclick="selectOption(this, ${index}, 1)">Levemente (1)</div>
-                    <div class="bai-option" onclick="selectOption(this, ${index}, 2)">Moderadamente (2)</div>
-                    <div class="bai-option" onclick="selectOption(this, ${index}, 3)">Severamente (3)</div>
-                `;
-                container.appendChild(qDiv);
+        // --- TEST LOGIC ---
+        function startTest() {
+            currentQuestion = 0;
+            score = 0;
+            showView('test-view');
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const qText = document.getElementById('questionText');
+            const opts = document.getElementById('optionsContainer');
+            const progress = document.getElementById('qProgress');
+            const currentSpan = document.getElementById('qCurrent');
+
+            qText.innerText = `Durante la última semana, ¿cuánto te ha molestado: ${baiQuestions[currentQuestion]}?`;
+            currentSpan.innerText = currentQuestion + 1;
+            progress.innerText = Math.round(((currentQuestion) / 21) * 100) + '%';
+
+            const options = ["Nada", "Levemente", "Moderadamente", "Severamente"];
+            const values = [0, 1, 2, 3];
+
+            opts.innerHTML = '';
+            options.forEach((opt, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(values[index]);
+                opts.appendChild(btn);
             });
         }
-        renderBAI();
 
-        let baiScores = new Array(21).fill(0);
-
-        function selectOption(el, index, score) {
-            // Limpiar selección previa en esa pregunta
-            const parent = el.parentElement;
-            parent.querySelectorAll('.bai-option').forEach(opt => opt.classList.remove('selected'));
-            
-            // Marcar nueva
-            el.classList.add('selected');
-            baiScores[index] = score;
+        function handleAnswer(value) {
+            score += value;
+            currentQuestion++;
+            if (currentQuestion < baiQuestions.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
         }
 
-        function calculateBAI() {
-            const total = baiScores.reduce((a, b) => a + b, 0);
-            const modal = document.getElementById('result-modal');
-            const title = document.getElementById('res-title');
-            const scoreEl = document.getElementById('res-score');
-            const desc = document.getElementById('res-desc');
-            const specSec = document.getElementById('specialist-section');
+        function showResults() {
+            showView('results-view');
+            localStorage.setItem('lastBAIScore', score);
+            
+            // Animate Score
+            const circle = document.getElementById('scoreCircle');
+            const percentage = (score / 63) * 100; // Max score 63
+            circle.style.background = `conic-gradient(var(--primary) ${percentage}%, var(--border) ${percentage}%)`;
+            
+            // Color logic
+            let color = '#00ff9d'; // Green
+            if(score > 10) color = '#ffcc00'; // Yellow
+            if(score > 19) color = '#ff4444'; // Red
+            
+            circle.style.borderColor = color;
+            circle.querySelector('.result-value').style.color = color;
 
-            scoreEl.innerText = total;
-            specSec.style.display = 'none';
+            // Typewriter effect for number
+            let currentNum = 0;
+            const numInterval = setInterval(() => {
+                document.getElementById('scoreValue').innerText = currentNum;
+                if(currentNum >= score) clearInterval(numInterval);
+                currentNum++;
+            }, 30);
 
-            if (total <= 7) {
+            // Diagnosis
+            const title = document.getElementById('diagnosisTitle');
+            const desc = document.getElementById('diagnosisDesc');
+            const alertBox = document.getElementById('specialistAlert');
+
+            alertBox.style.display = 'none';
+
+            if (score <= 7) {
                 title.innerText = "Ansiedad Mínima";
-                title.style.color = "var(--success)";
-                desc.innerText = "Tu nivel de ansiedad es normal. ¡Sigue cuidando tu mente!";
-            } else if (total <= 19) {
+                title.style.color = "#00ff9d";
+                desc.innerText = "Tu nivel de ansiedad es normal. Sigue practicando buenos hábitos.";
+            } else if (score <= 15) {
                 title.innerText = "Ansiedad Leve";
-                title.style.color = "#ffff00";
-                desc.innerText = "Tienes síntomas leves. Los ejercicios de respiración te ayudarán mucho.";
-            } else if (total <= 29) {
+                title.style.color = "#ffcc00";
+                desc.innerText = "Tienes algunos síntomas de ansiedad. Los ejercicios de esta app te ayudarán.";
+            } else if (score <= 25) {
                 title.innerText = "Ansiedad Moderada";
-                title.style.color = "orange";
-                desc.innerText = "Tu ansiedad está interfiriendo un poco en tu día. Considera practicar los ejercicios diarios.";
+                title.style.color = "#ffaa00";
+                desc.innerText = "Tu ansiedad está afectando tu día a día. Considera practicar más ejercicios o hablar con alguien.";
+                alertBox.style.display = 'block';
             } else {
                 title.innerText = "Ansiedad Severa";
-                title.style.color = "var(--danger)";
-                desc.innerText = "Estás experimentando un nivel alto de ansiedad. Es importante buscar apoyo profesional.";
-                specSec.style.display = 'block';
+                title.style.color = "#ff4444";
+                desc.innerText = "Los síntomas son intensos. Es muy importante que busques apoyo profesional especializado.";
+                alertBox.style.display = 'block';
             }
 
-            modal.style.display = 'flex';
-            addXP(50); // XP por completar test
+            addXP(100); // XP for completing test
         }
 
-        // --- GEOLOCALIZACIÓN ESPECIALISTAS ---
         function findSpecialist() {
-            if ("geolocation" in navigator) {
+            if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(position => {
                     const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
-                    // Abrir Google Maps buscando psicólogos cerca
-                    const url = `https://www.google.com/maps/search/psicologo+cerca+de+mi/@${lat},${lng},15z`;
+                    const lon = position.coords.longitude;
+                    const url = `https://www.google.com/maps/search/psicologo+near+me/@${lat},${lon},14z`;
                     window.open(url, '_blank');
                 }, () => {
-                    alert("No pudimos obtener tu ubicación. Abre Google Maps manualmente.");
-                    window.open("https://www.google.com/maps/search/psicologo", '_blank');
+                    // Fallback if location denied
+                    window.open('https://www.google.com/maps/search/psicologo+cercano', '_blank');
                 });
             } else {
-                alert("Tu navegador no soporta geolocalización.");
+                window.open('https://www.google.com/maps/search/psicologo', '_blank');
             }
         }
 
-        // --- EJERCICIOS INTERACTIVOS ---
-        function startExercise(type) {
-            const area = document.getElementById('active-exercise-area');
-            const title = document.getElementById('ex-title');
-            const content = document.getElementById('ex-content');
+        // --- CHALLENGES LOGIC ---
+        function loadDailyChallenges() {
+            const container = document.getElementById('challengesList');
+            container.innerHTML = '';
             
-            area.style.display = 'block';
-            area.scrollIntoView({ behavior: 'smooth' });
+            // Simple pseudo-random based on date to keep same challenges all day
+            const seed = new Date().getDate(); 
+            const dailyChallenges = [
+                challengesDB[seed % challengesDB.length],
+                challengesDB[(seed + 1) % challengesDB.length],
+                challengesDB[(seed + 2) % challengesDB.length]
+            ];
 
-            if (type === 'breath') {
-                title.innerText = "Respiración 4-7-8";
-                content.innerHTML = `
-                    <div class="breath-circle"></div>
-                    <p id="breath-text" style="font-size: 1.2rem; font-weight: bold;">Inhala...</p>
+            dailyChallenges.forEach((chal, index) => {
+                const uniqueId = `${seed}-${index}`;
+                const isDone = completedChallenges.includes(uniqueId);
+
+                const item = document.createElement('div');
+                item.className = 'challenge-item';
+                item.innerHTML = `
+                    <span style="font-size: 0.9rem;">${chal.text}</span>
+                    <div class="checkbox-custom ${isDone ? 'checked' : ''}" onclick="toggleChallenge('${uniqueId}', ${chal.xp}, this)">
+                        ${isDone ? '<i class="fas fa-check"></i>' : ''}
+                    </div>
                 `;
-                document.querySelector('.breath-circle').parentElement.classList.add('breathing');
-                
-                let cycle = 0;
-                const textEl = document.getElementById('breath-text');
-                const interval = setInterval(() => {
-                    cycle++;
-                    if (cycle % 3 === 1) textEl.innerText = "Inhala (4s)...";
-                    if (cycle % 3 === 2) textEl.innerText = "Retén (7s)...";
-                    if (cycle % 3 === 0) textEl.innerText = "Exhala (8s)...";
-                    if (cycle > 12) { clearInterval(interval); textEl.innerText = "¡Bien hecho!"; }
-                }, 4000); // Simplificado para demo
-                
+                container.appendChild(item);
+            });
+        }
+
+        function toggleChallenge(id, xp, element) {
+            if (completedChallenges.includes(id)) return; // Already done
+
+            completedChallenges.push(id);
+            localStorage.setItem('menteSanaChallenges', JSON.stringify(completedChallenges));
+            
+            element.classList.add('checked');
+            element.innerHTML = '<i class="fas fa-check"></i>';
+            
+            addXP(xp);
+            
+            // Haptic feedback if available
+            if (navigator.vibrate) navigator.vibrate(50);
+        }
+
+        // --- EXERCISES LOGIC ---
+        function openExercise(type) {
+            const modal = document.getElementById('exerciseModal');
+            const title = document.getElementById('modalTitle');
+            const instr = document.getElementById('modalInstruction');
+            const breathVis = document.getElementById('breathingVisual');
+            const groundCont = document.getElementById('groundingContent');
+
+            modal.style.display = 'flex';
+            breathVis.style.display = 'none';
+            groundCont.style.display = 'none';
+            breathVis.classList.remove('animate-breathe');
+
+            if (type === 'breathing') {
+                title.innerText = "Respiración 4-7-8";
+                instr.innerText = "Inhala (4s), Retén (7s), Exhala (8s). Sigue el círculo.";
+                breathVis.style.display = 'block';
+                setTimeout(() => breathVis.classList.add('animate-breathe'), 100);
             } else if (type === 'grounding') {
                 title.innerText = "Técnica 5-4-3-2-1";
-                content.innerHTML = `
-                    <p style="text-align: left; line-height: 1.6;">
-                        👀 <strong>5</strong> cosas que puedes ver.<br>
-                        ✋ <strong>4</strong> cosas que puedes tocar.<br>
-                        👂 <strong>3</strong> cosas que puedes oír.<br>
-                        👃 <strong>2</strong> cosas que puedes oler.<br>
-                        👅 <strong>1</strong> cosa que puedes saborear.
-                    </p>
-                    <p style="margin-top:10px; font-size: 0.8rem; color: #888;">Concéntrate en cada sentido para anclarte al presente.</p>
-                `;
+                instr.innerText = "Conecta con tus sentidos para calmarte inmediatamente:";
+                groundCont.style.display = 'block';
+            } else if (type === 'muscle') {
+                title.innerText = "Relajación Progresiva";
+                instr.innerText = "Tensa fuerte los pies por 5 segundos... y suelta. Sube por las piernas, abdomen, manos, hombros y cara.";
             } else {
-                title.innerText = "Próximamente";
-                content.innerHTML = "<p>Este ejercicio estará disponible en la próxima actualización.</p>";
+                title.innerText = "Lugar Seguro";
+                instr.innerText = "Cierra los ojos. Imagina un lugar donde te sientas 100% seguro y en paz. ¿Qué colores ves? ¿Qué sonidos hay?";
             }
         }
 
         function closeExercise() {
-            document.getElementById('active-exercise-area').style.display = 'none';
-            document.querySelector('.breathing')?.classList.remove('breathing');
+            document.getElementById('exerciseModal').style.display = 'none';
         }
 
     </script>
